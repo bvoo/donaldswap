@@ -1,0 +1,18 @@
+min_swap_minutes = 1
+max_swap_minutes = 1
+auto_swap_enabled = true
+hide_next_swap = false
+
+[[games]]
+exe_name = "chrome.exe"
+display_name = "gogle chome"
+send_esc_on_leave = false
+send_esc_on_enter = false
+enabled = true
+
+[[games]]
+exe_name = "WindowsTerminal.exe"
+display_name = "swag"
+send_esc_on_leave = false
+send_esc_on_enter = false
+enabled = true
