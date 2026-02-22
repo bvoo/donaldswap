@@ -1,6 +1,6 @@
 # DonaldSwap
 
-A lightweight, automated game window swapper designed for chaotic streaming challenges. DonaldSwap randomly rotates focus between a set of configured game windows every few minutes, simulating pause/unpause inputs to ensure the games wait for you.
+A lightweight, automated window swapper designed. DonaldSwap randomly rotates focus between a set of configured game windows and configured time intervals, simulating pause/unpause inputs between swaps.
 
 ## Features
 
@@ -9,7 +9,7 @@ A lightweight, automated game window swapper designed for chaotic streaming chal
 - **Web Dashboard**: Clean, dark-mode web interface to manage your rotation, monitor timers, and manually force/pause the swap sequence.
 - **OBS Browser Source**: Built-in HUD specifically designed to be added as an OBS browser source, showing your viewers the current game, time elapsed, and time until the next swap.
 - **Focus Stealing Bypass**: Bypasses Windows' built-in foreground window locks using low-level API input simulation to ensure the games reliably pop up.
-- **Swap History**: Keeps track of exactly how long you spent in the last 10 games during the session.
+- **Swap History**: Keeps track of exactly how long you spent in games during the session.
 
 ## Installation
 
