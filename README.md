@@ -9,6 +9,7 @@ A lightweight, automated window swapper designed. DonaldSwap randomly rotates fo
 - **Web Dashboard**: Clean, dark-mode web interface to manage your rotation, monitor timers, and manually force/pause the swap sequence.
 - **OBS Browser Source**: Built-in HUD specifically designed to be added as an OBS browser source, showing your viewers the current game, time elapsed, and time until the next swap.
 - **Focus Stealing Bypass**: Bypasses Windows' built-in foreground window locks using low-level API input simulation to ensure the games reliably pop up.
+- **OBS Scene Switching**: Automatically change scenes in OBS via WebSocket when a game is swapped in.
 - **Swap History**: Keeps track of exactly how long you spent in games during the session.
 
 ![Dashboard Preview](assets/dashboard.png)
@@ -56,7 +57,15 @@ OBS Browser Src: http://127.0.0.1:3000/obs.html
 - By default, the swapper picks a random time between **5 and 15 minutes**. You can adjust this in the "Configuration" panel.
 - For each game, you can toggle `ESC on Leave` and `ESC on Enter`. If a game automatically pauses when it loses focus, you might want to turn off `ESC on Leave` so the swapper doesn't accidentally unpause it.
 
-### 3. Add to OBS
+### 3. Setup OBS Automatic Scene Switching (Optional)
+If you want DonaldSwap to automatically change scenes in OBS when a game swaps in:
+1. In OBS, go to **Tools -> WebSocket Server Settings**.
+2. Check **Enable WebSocket server**.
+3. Note the Port (usually `4455`) and the Server Password.
+4. Open the DonaldSwap Dashboard and input these details in the **OBS WebSocket** panel, then click **Save**.
+5. In the Rotation List, type the *exact* name of the OBS scene in the "OBS Scene" input box below the game's title. Leave it blank if you don't want the scene to change for a specific game.
+
+### 4. Add the HUD to OBS
 1. In OBS, add a new **Browser Source**.
 2. Set the URL to `http://127.0.0.1:3000/obs.html`.
 3. Set the width/height to your preference (e.g., Width: 600, Height: 150).
