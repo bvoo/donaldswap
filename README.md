@@ -11,6 +11,8 @@ A lightweight, automated window swapper designed. DonaldSwap randomly rotates fo
 - **Focus Stealing Bypass**: Bypasses Windows' built-in foreground window locks using low-level API input simulation to ensure the games reliably pop up.
 - **Swap History**: Keeps track of exactly how long you spent in games during the session.
 
+![Dashboard Preview](assets/dashboard.png)
+
 ## Installation
 
 ### Pre-built Binaries (Windows only)
@@ -59,6 +61,8 @@ OBS Browser Src: http://127.0.0.1:3000/obs.html
 2. Set the URL to `http://127.0.0.1:3000/obs.html`.
 3. Set the width/height to your preference (e.g., Width: 600, Height: 150).
 4. (Optional) Check "Hide Next Swap Information" in the web dashboard if you want the next swap time to be a surprise to chat!
+
+![OBS Browser Source HUD](assets/hollowknight.png)
 
 ## Configuration File
 
