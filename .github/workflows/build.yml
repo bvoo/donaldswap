@@ -32,10 +32,11 @@ jobs:
       run: cargo build --release --verbose
       
     - name: Prepare artifact folder
+      shell: bash
       run: |
-        mkdir release_build
-        copy target/release/donaldswap.exe release_build/
-        xcopy /E /I static release_build/static/
+        mkdir -p release_build
+        cp target/release/donaldswap.exe release_build/
+        cp -r static release_build/static/
         echo "Please launch donaldswap.exe and use http://127.0.0.1:3000" > release_build/README.txt
         
     - name: Upload Artifact
