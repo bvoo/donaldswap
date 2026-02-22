@@ -24,6 +24,9 @@ pub struct UpdateConfigRequest {
     pub max_swap_minutes: Option<u32>,
     pub auto_swap_enabled: Option<bool>,
     pub hide_next_swap: Option<bool>,
+    pub obs_ws_host: Option<String>,
+    pub obs_ws_port: Option<u16>,
+    pub obs_ws_password: Option<Option<String>>,
 }
 
 #[derive(Debug, Serialize)]
@@ -75,6 +78,15 @@ async fn update_config(
             }
             if let Some(hide) = req.hide_next_swap {
                 c.hide_next_swap = hide;
+            }
+            if let Some(host) = req.obs_ws_host {
+                c.obs_ws_host = host;
+            }
+            if let Some(port) = req.obs_ws_port {
+                c.obs_ws_port = port;
+            }
+            if let Some(pass) = req.obs_ws_password {
+                c.obs_ws_password = pass;
             }
         })
         .await;

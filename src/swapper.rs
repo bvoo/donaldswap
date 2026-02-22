@@ -142,6 +142,22 @@ impl Swapper {
                 .await;
 
             info!("Swap complete");
+            
+            // Try to switch OBS scene if configured
+            if let Some(scene_name) = &next_game.obs_scene {
+                if !scene_name.trim().is_empty() {
+                    let host = config.obs_ws_host.clone();
+                    let port = config.obs_ws_port;
+                    let pass = config.obs_ws_password.clone();
+                    let scene = scene_name.clone();
+                    
+                    // Spawn a task so it doesn't block the swapper loop if it hangs
+                    tokio::spawn(async move {
+                        let pass_deref = pass.as_deref().filter(|p| !p.is_empty());
+                        let _ = crate::obs::switch_scene(&host, port, pass_deref, &scene).await;
+                    });
+                }
+            }
         } else {
             warn!("Game window not found: {}", next_game.exe_name);
         }

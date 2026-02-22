@@ -15,6 +15,8 @@ pub struct GameConfig {
     pub send_esc_on_enter: bool,
     #[serde(default = "default_true")]
     pub enabled: bool,
+    #[serde(default)]
+    pub obs_scene: Option<String>,
 }
 
 fn default_true() -> bool {
@@ -29,6 +31,7 @@ impl Default for GameConfig {
             send_esc_on_leave: true,
             send_esc_on_enter: true,
             enabled: true,
+            obs_scene: None,
         }
     }
 }
@@ -45,6 +48,12 @@ pub struct AppConfig {
     pub auto_swap_enabled: bool,
     #[serde(default)]
     pub hide_next_swap: bool,
+    #[serde(default = "default_obs_host")]
+    pub obs_ws_host: String,
+    #[serde(default = "default_obs_port")]
+    pub obs_ws_port: u16,
+    #[serde(default)]
+    pub obs_ws_password: Option<String>,
 }
 
 fn default_min_swap() -> u32 {
@@ -55,6 +64,14 @@ fn default_max_swap() -> u32 {
     15
 }
 
+fn default_obs_host() -> String {
+    "localhost".to_string()
+}
+
+fn default_obs_port() -> u16 {
+    4455
+}
+
 impl Default for AppConfig {
     fn default() -> Self {
         Self {
@@ -63,6 +80,9 @@ impl Default for AppConfig {
             max_swap_minutes: 15,
             auto_swap_enabled: true,
             hide_next_swap: false,
+            obs_ws_host: "localhost".to_string(),
+            obs_ws_port: 4455,
+            obs_ws_password: None,
         }
     }
 }

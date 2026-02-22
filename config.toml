@@ -2,6 +2,8 @@ min_swap_minutes = 1
 max_swap_minutes = 1
 auto_swap_enabled = true
 hide_next_swap = false
+obs_ws_host = "localhost"
+obs_ws_port = 4455
 
 [[games]]
 exe_name = "chrome.exe"
@@ -9,10 +11,12 @@ display_name = "gogle chome"
 send_esc_on_leave = false
 send_esc_on_enter = false
 enabled = true
+obs_scene = "awa"
 
 [[games]]
 exe_name = "WindowsTerminal.exe"
-display_name = "swag"
+display_name = "Hollow Knight"
 send_esc_on_leave = false
 send_esc_on_enter = false
 enabled = true
+obs_scene = "awa2"

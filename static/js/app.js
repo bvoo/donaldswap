@@ -132,6 +132,16 @@ function renderGameList() {
                        onkeydown="if(event.key === 'Enter') this.blur()"
                        title="Click to edit display name">
                 <div class="list-item-sub">${escapeHtml(game.exe_name)}</div>
+                
+                <div style="margin-top: 0.5rem; display: flex; align-items: center; gap: 0.5rem;">
+                    <span style="font-size: 0.75rem; color: var(--muted);">OBS Scene:</span>
+                    <input type="text" 
+                           placeholder="Scene name (empty = ignore)"
+                           value="${escapeHtml(game.obs_scene || '')}"
+                           onblur="updateGameScene(${index}, this.value)"
+                           onkeydown="if(event.key === 'Enter') this.blur()"
+                           style="padding: 0.25rem 0.5rem; font-size: 0.75rem; width: 200px; border: 1px solid var(--border); background: transparent; color: var(--fg); border-radius: 4px;">
+                </div>
             </div>
             <div class="list-item-actions">
                 <div class="toggles-row">
@@ -169,6 +179,9 @@ function renderSettings() {
   document.getElementById("max-swap").value = config.max_swap_minutes;
   document.getElementById("auto-swap").checked = config.auto_swap_enabled;
   document.getElementById("hide-next-swap").checked = config.hide_next_swap;
+  document.getElementById("obs-host").value = config.obs_ws_host;
+  document.getElementById("obs-port").value = config.obs_ws_port;
+  document.getElementById("obs-password").value = config.obs_ws_password || "";
 }
 
 function renderWindowPicker() {
@@ -211,6 +224,11 @@ async function updateGame(index, field, value) {
 async function updateGameTitle(index, newTitle) {
   if (newTitle.trim() === "") return;
   config.games[index].display_name = newTitle.trim();
+  await saveConfig();
+}
+
+async function updateGameScene(index, newScene) {
+  config.games[index].obs_scene = newScene.trim() === "" ? null : newScene.trim();
   await saveConfig();
 }
 
@@ -274,6 +292,14 @@ async function resumeSwapper() {
 document.getElementById("settings-form").addEventListener("submit", (e) => {
   e.preventDefault();
   updateSettings();
+});
+
+document.getElementById("obs-form").addEventListener("submit", (e) => {
+  e.preventDefault();
+  config.obs_ws_host = document.getElementById("obs-host").value.trim() || "localhost";
+  config.obs_ws_port = parseInt(document.getElementById("obs-port").value) || 4455;
+  config.obs_ws_password = document.getElementById("obs-password").value.trim() || null;
+  saveConfig().then(() => alert("OBS Settings Saved"));
 });
 
 fetchConfig();

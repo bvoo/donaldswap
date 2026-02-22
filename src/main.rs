@@ -1,5 +1,6 @@
 mod config;
 mod input;
+mod obs;
 mod server;
 mod state;
 mod swapper;
