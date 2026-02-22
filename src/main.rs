@@ -47,7 +47,11 @@ async fn main() -> anyhow::Result<()> {
     );
 
     let addr: SocketAddr = "127.0.0.1:3000".parse()?;
-    info!("Server running at http://{}", addr);
+    info!("===============================================");
+    info!("DonaldSwap is running!");
+    info!("Dashboard:       http://{}", addr);
+    info!("OBS Browser Src: http://{}/obs.html", addr);
+    info!("===============================================");
 
     let listener = tokio::net::TcpListener::bind(addr).await?;
     axum::serve(listener, app).await?;
