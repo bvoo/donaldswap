@@ -1,5 +1,6 @@
 use chrono::{DateTime, Utc};
 use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
 use std::sync::Arc;
 use tokio::sync::{broadcast, RwLock};
 
@@ -24,6 +25,8 @@ pub struct SwapState {
     pub time_until_swap_seconds: Option<i64>,
     #[serde(default)]
     pub history: Vec<SwapHistoryItem>,
+    #[serde(default)]
+    pub total_times: HashMap<String, u64>,
 }
 
 

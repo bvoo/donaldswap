@@ -9,6 +9,7 @@ use axum::{
 };
 use tracing::{info, warn};
 use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
 
 #[derive(Debug, Serialize)]
 pub struct WindowInfoResponse {
@@ -40,6 +41,8 @@ pub struct StateResponse {
     pub time_since_swap_seconds: Option<i64>,
     pub time_until_swap_seconds: Option<i64>,
     pub history: Vec<crate::state::SwapHistoryItem>,
+    #[serde(default)]
+    pub total_times: HashMap<String, u64>,
 }
 
 pub fn create_api_router() -> Router<ServerState> {
@@ -139,6 +142,7 @@ async fn get_state(State(state): State<ServerState>) -> impl IntoResponse {
         time_since_swap_seconds,
         time_until_swap_seconds,
         history: swap_state.history,
+        total_times: swap_state.total_times,
     })
 }
 

@@ -116,14 +116,16 @@ impl Swapper {
             let state = self.app_state.get_state().await;
             
             let mut new_history = state.history.clone();
+            let mut total_times = state.total_times.clone();
             if let (Some(prev_game), Some(prev_time)) = (state.current_game, state.last_swap_at) {
                 let duration = (now - prev_time).num_seconds().max(0) as u64;
                 new_history.insert(0, crate::state::SwapHistoryItem {
-                    game_name: prev_game,
+                    game_name: prev_game.clone(),
                     duration_seconds: duration,
                 });
                 
-                // Keep only last 10 entries to prevent infinite growth
+                *total_times.entry(prev_game).or_insert(0) += duration;
+                
                 if new_history.len() > 10 {
                     new_history.pop();
                 }
@@ -138,6 +140,7 @@ impl Swapper {
                     s.last_swap_at = Some(now);
                     s.swap_count = swap_count;
                     s.history = new_history;
+                    s.total_times = total_times;
                 })
                 .await;
 
